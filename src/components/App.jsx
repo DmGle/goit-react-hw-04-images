@@ -31,8 +31,8 @@ const App = () => {
       fetchImages();
     }
   }, [page]);
-
-  const fetchImages = () => {
+  
+  const fetchImages = React.useCallback(() => {
     setIsLoading(true);
 
     axios
@@ -43,7 +43,7 @@ const App = () => {
       })
       .catch((error) => console.error('Error fetching images:', error))
       .finally(() => setIsLoading(false));
-  };
+  }, [query, page, perPage]);
 
   const handleLoadMore = () => {
     if (!isLoading) {
